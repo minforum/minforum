@@ -35,7 +35,7 @@
     "csvjson": "^5.1.0",
     "dotenv": "^16.0.1",
     "express-useragent": "^1.0.15",
-    "formidable": "^2.0.1",
+    "formidable": "^2.1.2",
     "helmet": "^5.1.0",
     "hugeicons-react": "^0.3.0",
     "mobx": "^6.6.1",
