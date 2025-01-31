@@ -27,7 +27,7 @@
     "apexcharts": "^3.35.3",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "crypto-js": "3.3.0",
+    "crypto-js": "4.2.0",
     "csvjson": "^5.1.0",
     "dotenv": "^16.0.1",
     "express-useragent": "^1.0.15",
