@@ -1375,6 +1375,10 @@ body {
     float: right;
   }
 
+  .hidden {
+    display: none !important;
+  }
+
   .desktop {
     display: inherit;
   }
