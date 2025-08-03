@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "setup": "sh setup.sh",
-    "dev": "yarn init-db && node serve-dev.js",
+    "dev": "yarn init-db && node serve.js",
     "init-db": "node src/components/api/db.js",
     "seed": "node src/components/api/seed.js",
     "seed:only": "node src/components/api/seed-post.js",
-    "seed:category": "node src/components/api/caegory.js",
+    "seed:category": "node src/components/api/category.js",
     "build": "next build",
     "live": "yarn init-db && yarn build && NODE_ENV=production pm2 start serve.js --name ${PM2_APP_NAME:-'minforum'}",
     "live:restart": "yarn init-db && yarn build && NODE_ENV=production pm2 restart serve.js --name ${PM2_APP_NAME:-'minforum'}",

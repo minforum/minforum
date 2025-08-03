@@ -34,12 +34,13 @@ const App = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
     const fetchTheme = async () => {
       try {
-        const settings: any = await settingsStore.getSettings();
+        const settings: any = await settingsStore?.getSettings();
+        console.log(settings);
         const themeSlug = settings?.data?.theme;
         setThemeSlug(themeSlug);
 
         if (themeSlug) {
-          const fetchedTheme: themeProp = await themeStore.getTheme(themeSlug);
+          const fetchedTheme: themeProp = await themeStore?.getTheme(themeSlug);
           let _theme =
             fetchedTheme && fetchedTheme?.code
               ? JSON.parse(fetchedTheme?.code)
@@ -75,7 +76,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     return (
       <GeistProvider
         themes={[customTheme, defaultTheme]}
-        themeType={customTheme ? themeSlug : 'minforum'}
+        themeType={customTheme ? themeSlug : 'weiss'}
       >
         <CssBaseline />
         {trackPageview()}

@@ -150,19 +150,40 @@ const validateEmail = (email) => {
 const encrypt = (data) => {
   const ciphertext = CryptoJS.AES.encrypt(
     data,
-    process.env.NEXT_PUBLIC_APP_SECRET
+    process.env.NEXT_PUBLIC_APP_SECRET // Using public secret
   ).toString();
   return ciphertext;
 };
 
 const decrypt = (data) => {
   try {
-    const bytes = CryptoJS.AES.decrypt(data, process.env.APP_SECRET);
+    const bytes = CryptoJS.AES.decrypt(
+      data,
+      process.env.NEXT_PUBLIC_APP_SECRET
+    ); // Now using same public secret
     const originalText = bytes.toString(CryptoJS.enc.Utf8);
     return originalText;
   } catch (error) {
     return null;
   }
+};
+
+const enc = (plainText) => {
+  var b64 = CryptoJS.AES.encrypt(
+    plainText,
+    process.env.NEXT_PUBLIC_APP_SECRET
+  ).toString();
+  var e64 = CryptoJS.enc.Base64.parse(b64);
+  var eHex = e64.toString(CryptoJS.enc.Hex);
+  return eHex;
+};
+
+const dec = (cipherText) => {
+  var reb64 = CryptoJS.enc.Hex.parse(cipherText);
+  var bytes = reb64.toString(CryptoJS.enc.Base64);
+  var decrypt = CryptoJS.AES.decrypt(bytes, process.env.NEXT_PUBLIC_APP_SECRET); // Now using same public secret
+  var plain = decrypt.toString(CryptoJS.enc.Utf8);
+  return plain;
 };
 
 const withAuth = async (req) => {
@@ -171,7 +192,7 @@ const withAuth = async (req) => {
 
   if (allowlist.indexOf(req.headers.host) !== -1) {
     const apikey = decrypt(req.headers.authorization);
-
+    console.log(apikey, ' = ', process.env.NEXT_PUBLIC_API_KEY);
     if (apikey !== process.env.NEXT_PUBLIC_API_KEY) {
       return { success: false, message: 'Invalid API key' };
     } else {
@@ -270,21 +291,6 @@ function validateUsername(username) {
   // If all checks pass, the username is valid
   return true;
 }
-
-const enc = (plainText) => {
-  var b64 = CryptoJS.AES.encrypt(plainText, process.env.APP_SECRET).toString();
-  var e64 = CryptoJS.enc.Base64.parse(b64);
-  var eHex = e64.toString(CryptoJS.enc.Hex);
-  return eHex;
-};
-
-const dec = (cipherText) => {
-  var reb64 = CryptoJS.enc.Hex.parse(cipherText);
-  var bytes = reb64.toString(CryptoJS.enc.Base64);
-  var decrypt = CryptoJS.AES.decrypt(bytes, process.env.NEXT_PUBLIC_APP_SECRET);
-  var plain = decrypt.toString(CryptoJS.enc.Utf8);
-  return plain;
-};
 
 const abbreviateText = (text, maxLength) => {
   if (text.length <= maxLength) {
