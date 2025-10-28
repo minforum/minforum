@@ -18,6 +18,7 @@ import { Bell, Menu, ChevronDown } from '@geist-ui/icons';
 import { observer } from 'mobx-react-lite';
 import { useRouter } from 'next/router';
 import useToken from '../token';
+import UserStore from 'stores/user';
 import SettingsStore from 'stores/settings';
 import NotificationStore from 'stores/notification';
 import { Translation } from 'components/intl/translation';
@@ -39,10 +40,32 @@ const Navbar = observer((props: navbarProps) => {
   const [{ unread, getUnreadNotification }] = useState(
     () => new NotificationStore()
   );
+  const [{ getUser }] = useState(() => new UserStore());
 
   useEffect(() => {
+    checkInvalidUser();
     token.id ? getUnreadNotification(token.id) : null;
   }, [token]);
+
+  const checkInvalidUser = async () => {
+    let user: any = cookie;
+    user = user && user._w_auth ? JSON.parse(user._w_auth) : null;
+
+    if (user.id) {
+      try {
+        let profile = await getUser(user.id);
+
+        if (!profile.data.id) {
+          destroyCookie({}, '_w_auth');
+          router.reload();
+        }
+      } catch (error) {
+        destroyCookie({}, '_w_auth');
+        router.reload();
+        console.error(error);
+      }
+    }
+  };
 
   const getFirstName = (name: string) => {
     let first: any = name.split(' ');

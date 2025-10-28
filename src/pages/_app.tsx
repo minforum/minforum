@@ -35,7 +35,6 @@ const App = ({ Component, pageProps }: AppProps) => {
     const fetchTheme = async () => {
       try {
         const settings: any = await settingsStore?.getSettings();
-        console.log(settings);
         const themeSlug = settings?.data?.theme;
         setThemeSlug(themeSlug);
 

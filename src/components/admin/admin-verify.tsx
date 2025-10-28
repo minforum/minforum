@@ -1,13 +1,13 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { observer } from 'mobx-react-lite';
 import SettingsStore from 'stores/settings';
 
 const AdminVerify = observer((props: any) => {
   const router = useRouter();
-  const [{ settings, getSettings }] = React.useState(() => new SettingsStore());
+  const [{ settings, getSettings }] = useState(() => new SettingsStore());
 
-  React.useEffect(() => {
+  useEffect(() => {
     router.isReady
       ? getSettings().then((settings: any) => {
           let data: any = settings?.data;

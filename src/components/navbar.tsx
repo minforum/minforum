@@ -62,7 +62,9 @@ const Navbar = observer((props: navbarProps) => {
   const [{ unread, getUnreadNotification }] = useState(
     () => new NotificationStore()
   );
-  const [{ users, setUsers, searchUsers }] = useState(() => new UserStore());
+  const [{ users, setUsers, searchUsers, getUser }] = useState(
+    () => new UserStore()
+  );
   const [{ discussions, setDiscussions, publicDiscussionSearch }] = useState(
     () => new DiscussionStore()
   );
@@ -71,12 +73,33 @@ const Navbar = observer((props: navbarProps) => {
   );
 
   useEffect(() => {
+    checkInvalidUser();
     token.id ? getUnreadNotification(token.id) : null;
     token.id ? getUnreadMessage(token.id) : null;
     cookie && settings?.announcementText && isNaN(Number(cookie?.isAnnounce))
       ? toggleAnnouncement(true)
       : false;
   }, [token]);
+
+  const checkInvalidUser = async () => {
+    let user: any = cookie;
+    user = user && user._w_auth ? JSON.parse(user._w_auth) : null;
+
+    if (user.id) {
+      try {
+        let profile = await getUser(user.id);
+
+        if (!profile.data.id) {
+          destroyCookie({}, '_w_auth');
+          router.reload();
+        }
+      } catch (error) {
+        destroyCookie({}, '_w_auth');
+        router.reload();
+        console.error(error);
+      }
+    }
+  };
 
   const getFirstName = (name: string) => {
     let first: any = name.split(' ');
