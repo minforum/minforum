@@ -2020,6 +2020,16 @@ const dict = [
     ko: '안쪽'
   },
   {
+    en: 'Please provide SMTP port',
+    es: 'Por favor proporcione el puerto SMTP',
+    fr: 'Veuillez indiquer le port SMTP',
+    de: 'Bitte geben Sie den SMTP-Port an',
+    cn: '请提供SMTP端口',
+    ja: 'SMTPポートを入力してください',
+    ru: 'Пожалуйста, укажите SMTP-порт',
+    ko: 'SMTP 포트를 제공해주세요.'
+  },
+  {
     en: 'Please provide SMTP host',
     es: 'Por favor proporcione el host SMTP',
     fr: "Veuillez indiquer l'hôte SMTP",
@@ -4396,6 +4406,36 @@ const dict = [
     ja: '表',
     ru: 'Таблица',
     ko: '표'
+  },
+  {
+    en: 'Token',
+    es: 'Token',
+    fr: 'Jeton',
+    de: 'Token',
+    cn: '令牌',
+    ja: 'トークン',
+    ru: 'Токен',
+    ko: '토큰'
+  },
+  {
+    en: 'Get help',
+    es: 'Obtener ayuda',
+    fr: "Obtenir de l'aide",
+    de: 'Hilfe erhalten',
+    cn: '获取帮助',
+    ja: 'ヘルプを取得',
+    ru: 'Получить помощь',
+    ko: '도움 받기'
+  },
+  {
+    en: 'API Key',
+    es: 'Clave API',
+    fr: 'Clé API',
+    de: 'API-Schlüssel',
+    cn: 'API密钥',
+    ja: 'APIキー',
+    ru: 'API-ключ',
+    ko: 'API 키'
   }
 ];
 

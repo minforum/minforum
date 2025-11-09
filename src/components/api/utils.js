@@ -192,7 +192,7 @@ const withAuth = async (req) => {
 
   if (allowlist.indexOf(req.headers.host) !== -1) {
     const apikey = decrypt(req.headers.authorization);
-    console.log(apikey, ' = ', process.env.NEXT_PUBLIC_API_KEY);
+
     if (apikey !== process.env.NEXT_PUBLIC_API_KEY) {
       return { success: false, message: 'Invalid API key' };
     } else {

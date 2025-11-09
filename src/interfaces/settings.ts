@@ -27,9 +27,22 @@ export interface settingsProp {
   cloudflareSecretKey?: string;
   advert?: { top: string; left: string; right: string; inner: string };
   email?: {
+    method?: 'smtp' | 'sendgrid' | 'awsSes' | 'zeptomail';
+    port?: number;
     host: string;
     email: string;
     password: string;
+    sendgrid?: {
+      apiKey?: string;
+    };
+    awsSes: {
+      accessKeyId?: string;
+      secretAccessKey?: string;
+      region?: string;
+    };
+    zeptomail?: {
+      token?: string;
+    };
   };
   point?: {
     login?: number;

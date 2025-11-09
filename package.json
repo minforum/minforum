@@ -20,13 +20,16 @@
     "maintained node versions"
   ],
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.927.0",
     "@codemirror/lang-javascript": "^6.2.2",
     "@geist-ui/core": "^2.3.8",
     "@geist-ui/icons": "^1.0.2",
     "@greatsumini/react-facebook-login": "^3.4.0",
     "@react-oauth/google": "^0.12.1",
+    "@sendgrid/mail": "^8.1.6",
     "@uiw/react-codemirror": "^4.23.7",
     "apexcharts": "^3.35.3",
+    "axios": "^1.13.2",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "crypto-js": "^4.2.0",

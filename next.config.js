@@ -7,7 +7,7 @@ const nextConfig = {
     ignoreDuringBuilds: true
   },
   compiler: {
-    removeConsole: true
+    removeConsole: false
   },
   webpack: (config, { isServer }) => {
     // Exclude .md files from being processed by Webpack

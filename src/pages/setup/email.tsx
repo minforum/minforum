@@ -46,7 +46,9 @@ const EmailSetup = observer((props: pageProps) => {
   };
 
   const save = async () => {
-    if (!email?.host) {
+    if (!email?.port) {
+      toast.error('Please provide SMTP port');
+    } else if (!email?.host) {
       toast.error('Please provide SMTP host');
     } else if (!email?.email) {
       toast.error('Invalid email address! Please provide SMTP email');

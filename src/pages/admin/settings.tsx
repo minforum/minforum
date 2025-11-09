@@ -12,7 +12,8 @@ import {
   Select,
   Divider,
   Toggle,
-  Radio
+  Radio,
+  Link
 } from '@geist-ui/core';
 import { setCookie, parseCookies } from 'nookies';
 import { MinusCircle, Image as Picture, Plus } from '@geist-ui/icons';
@@ -977,104 +978,333 @@ const Settings = observer(() => {
                 value: 'Email settings'
               })}
             >
-              <div className="column">
-                <div className="item">
-                  <Text h6>
-                    <Translation lang={settings?.language} value="SMTP port" />
-                  </Text>
-                </div>
-                <div className="item">
-                  <Input
-                    width={'100%'}
-                    value={email?.port}
-                    onChange={(e: any) =>
-                      setSettings({
-                        ...settings,
-                        email: { ...email, port: e.target.value }
-                      })
-                    }
-                  />
-                </div>
-              </div>
-              <div className="column">
-                <div className="item">
-                  <Text h6>
-                    <Translation lang={settings?.language} value="SMTP host" />
-                  </Text>
-                </div>
-                <div className="item">
-                  <Input
-                    width={'100%'}
-                    value={email?.host}
-                    onChange={(e: any) =>
-                      setSettings({
-                        ...settings,
-                        email: { ...email, host: e.target.value }
-                      })
-                    }
-                  />
-                </div>
-              </div>
-              <div className="column">
-                <div className="item">
-                  <Text h6>
-                    <Translation
-                      lang={settings?.language}
-                      value="SMTP user/email"
-                    />
-                  </Text>
-                </div>
-                <div className="item">
-                  <Input
-                    width={'100%'}
-                    value={email?.email}
-                    onChange={(e: any) =>
-                      setSettings({
-                        ...settings,
-                        email: { ...email, email: e.target.value }
-                      })
-                    }
-                  />
-                </div>
-              </div>
+              <Tabs initialValue={email?.method || 'smtp'}>
+                <Tabs.Item value="smtp" label="SMTP">
+                  <div className="column">
+                    <div className="item">
+                      <Text h6>
+                        <Translation
+                          lang={settings?.language}
+                          value="SMTP port"
+                        />
+                      </Text>
+                    </div>
+                    <div className="item">
+                      <Input
+                        htmlType="number"
+                        width={'100%'}
+                        value={email?.port?.toString() || ''}
+                        onChange={(e: any) =>
+                          setSettings({
+                            ...settings,
+                            email: {
+                              ...email,
+                              port: parseInt(e.target.value) || 587
+                            }
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="column">
+                    <div className="item">
+                      <Text h6>
+                        <Translation
+                          lang={settings?.language}
+                          value="SMTP host"
+                        />
+                      </Text>
+                    </div>
+                    <div className="item">
+                      <Input
+                        width={'100%'}
+                        value={email?.host || ''}
+                        onChange={(e: any) =>
+                          setSettings({
+                            ...settings,
+                            email: { ...email, host: e.target.value }
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="column">
+                    <div className="item">
+                      <Text h6>
+                        <Translation
+                          lang={settings?.language}
+                          value="SMTP user/email"
+                        />
+                      </Text>
+                    </div>
+                    <div className="item">
+                      <Input
+                        width={'100%'}
+                        value={email?.email || ''}
+                        onChange={(e: any) =>
+                          setSettings({
+                            ...settings,
+                            email: { ...email, email: e.target.value }
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="column">
+                    <div className="item">
+                      <Text h6>
+                        <Translation
+                          lang={settings?.language}
+                          value="SMTP password"
+                        />
+                      </Text>
+                    </div>
+                    <div className="item">
+                      <Input.Password
+                        width={'100%'}
+                        value={email?.password || ''}
+                        onChange={(e: any) =>
+                          setSettings({
+                            ...settings,
+                            email: { ...email, password: e.target.value }
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="column">
+                    <div className="item">
+                      <Text h6></Text>
+                    </div>
+                    <div className="item">
+                      <Button
+                        shadow
+                        type="secondary"
+                        loading={loading}
+                        onClick={save}
+                      >
+                        <Translation lang={settings?.language} value="Save" />
+                      </Button>
+                    </div>
+                  </div>
+                </Tabs.Item>
 
-              <div className="column">
-                <div className="item">
-                  <Text h6>
-                    <Translation
-                      lang={settings?.language}
-                      value="SMTP password"
-                    />
-                  </Text>
-                </div>
-                <div className="item">
-                  <Input.Password
-                    width={'100%'}
-                    value={email?.password}
-                    onChange={(e: any) =>
-                      setSettings({
-                        ...settings,
-                        email: { ...email, password: e.target.value }
-                      })
-                    }
-                  />
-                </div>
-              </div>
-              <div className="column">
-                <div className="item">
-                  <Text h6></Text>
-                </div>
-                <div className="item">
-                  <Button
-                    shadow
-                    type="secondary"
-                    loading={loading}
-                    onClick={save}
-                  >
-                    <Translation lang={settings?.language} value="Save" />
-                  </Button>
-                </div>
-              </div>
+                <Tabs.Item value="sendgrid" label="SendGrid">
+                  <p>
+                    <Link
+                      href="https://www.twilio.com/docs/sendgrid/for-developers/sending-email/api-getting-started"
+                      target="_blank"
+                      color
+                      icon
+                    >
+                      <Translation lang={settings?.language} value="Get help" />
+                    </Link>
+                  </p>
+                  <div className="column">
+                    <div className="item">
+                      <Text h6>
+                        <Translation
+                          lang={settings?.language}
+                          value="API Key"
+                        />
+                      </Text>
+                    </div>
+                    <div className="item">
+                      <Input.Password
+                        width={'100%'}
+                        value={email?.sendgrid?.apiKey || ''}
+                        onChange={(e: any) => {
+                          const updatedEmail = {
+                            ...email,
+                            method: 'sendgrid' as const,
+                            sendgrid: {
+                              ...email?.sendgrid,
+                              apiKey: e.target.value
+                            }
+                          };
+                          setSettings({
+                            ...settings,
+                            email: updatedEmail
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="column">
+                    <div className="item">
+                      <Text h6></Text>
+                    </div>
+                    <div className="item">
+                      <Button
+                        shadow
+                        type="secondary"
+                        loading={loading}
+                        onClick={save}
+                      >
+                        <Translation lang={settings?.language} value="Save" />
+                      </Button>
+                    </div>
+                  </div>
+                </Tabs.Item>
+
+                <Tabs.Item value="awsSes" label="AWS SES">
+                  <p>
+                    <Link
+                      href="https://docs.aws.amazon.com/ses/latest/dg/send-email-api.html"
+                      target="_blank"
+                      color
+                      icon
+                    >
+                      <Translation lang={settings?.language} value="Get help" />
+                    </Link>
+                  </p>
+                  <div className="column">
+                    <div className="item">
+                      <Text h6>AWS Access Key ID</Text>
+                    </div>
+                    <div className="item">
+                      <Input
+                        width={'100%'}
+                        value={email?.awsSes?.accessKeyId || ''}
+                        onChange={(e: any) => {
+                          const updatedEmail = {
+                            ...email,
+                            method: 'awsSes' as const,
+                            awsSes: {
+                              ...email?.awsSes,
+                              accessKeyId: e.target.value
+                            }
+                          };
+                          setSettings({
+                            ...settings,
+                            email: updatedEmail
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="column">
+                    <div className="item">
+                      <Text h6>AWS Secret Access Key</Text>
+                    </div>
+                    <div className="item">
+                      <Input.Password
+                        width={'100%'}
+                        value={email?.awsSes?.secretAccessKey || ''}
+                        onChange={(e: any) => {
+                          const updatedEmail = {
+                            ...email,
+                            method: 'awsSes' as const,
+                            awsSes: {
+                              ...email?.awsSes,
+                              secretAccessKey: e.target.value
+                            }
+                          };
+                          setSettings({
+                            ...settings,
+                            email: updatedEmail
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="column">
+                    <div className="item">
+                      <Text h6>AWS Region</Text>
+                    </div>
+                    <div className="item">
+                      <Input
+                        width={'100%'}
+                        value={email?.awsSes?.region || ''}
+                        onChange={(e: any) => {
+                          const updatedEmail = {
+                            ...email,
+                            method: 'awsSes' as const,
+                            awsSes: {
+                              ...email?.awsSes,
+                              region: e.target.value
+                            }
+                          };
+                          setSettings({
+                            ...settings,
+                            email: updatedEmail
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="column">
+                    <div className="item">
+                      <Text h6></Text>
+                    </div>
+                    <div className="item">
+                      <Button
+                        shadow
+                        type="secondary"
+                        loading={loading}
+                        onClick={save}
+                      >
+                        <Translation lang={settings?.language} value="Save" />
+                      </Button>
+                    </div>
+                  </div>
+                </Tabs.Item>
+
+                <Tabs.Item value="zeptomail" label="ZeptoMail">
+                  <p>
+                    <Link
+                      href="https://www.zoho.com/zeptomail/help/smtp-home.html#alink2"
+                      target="_blank"
+                      color
+                      icon
+                    >
+                      <Translation lang={settings?.language} value="Get help" />
+                    </Link>
+                  </p>
+                  <div className="column">
+                    <div className="item">
+                      <Text h6>
+                        <Translation lang={settings?.language} value="Token" />
+                      </Text>
+                    </div>
+                    <div className="item">
+                      <Input.Password
+                        width={'100%'}
+                        value={email?.zeptomail?.token || ''}
+                        onChange={(e: any) => {
+                          const updatedEmail = {
+                            ...email,
+                            method: 'zeptomail' as const,
+                            zeptomail: {
+                              ...email?.zeptomail,
+                              token: e.target.value
+                            }
+                          };
+                          setSettings({
+                            ...settings,
+                            email: updatedEmail
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="column">
+                    <div className="item">
+                      <Text h6></Text>
+                    </div>
+                    <div className="item">
+                      <Button
+                        shadow
+                        type="secondary"
+                        loading={loading}
+                        onClick={save}
+                      >
+                        <Translation lang={settings?.language} value="Save" />
+                      </Button>
+                    </div>
+                  </div>
+                </Tabs.Item>
+              </Tabs>
             </Collapse>
             <Collapse
               title={translation({

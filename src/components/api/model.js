@@ -435,6 +435,7 @@ const initModel = () => {
           homepage: {
             bgColor: '#2A222F'
           },
+          email: { method: 'smtp' },
           twoFactor: false
         };
 
