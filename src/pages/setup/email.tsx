@@ -135,6 +135,26 @@ const EmailSetup = observer((props: pageProps) => {
                 htmlType="url"
                 placeholder={translation({
                   lang: lang,
+                  value: 'SMTP port'
+                })}
+                width="100%"
+                scale={4 / 3}
+                value={email?.port}
+                onChange={(e) =>
+                  handleSettings({
+                    email: {
+                      ...email,
+                      ...{ port: e.target.value }
+                    }
+                  })
+                }
+              />
+              <Spacer h={1.5} />
+
+              <Input
+                htmlType="url"
+                placeholder={translation({
+                  lang: lang,
                   value: 'SMTP host'
                 })}
                 width="100%"
