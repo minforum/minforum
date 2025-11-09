@@ -980,6 +980,25 @@ const Settings = observer(() => {
               <div className="column">
                 <div className="item">
                   <Text h6>
+                    <Translation lang={settings?.language} value="SMTP port" />
+                  </Text>
+                </div>
+                <div className="item">
+                  <Input
+                    width={'100%'}
+                    value={email?.port}
+                    onChange={(e: any) =>
+                      setSettings({
+                        ...settings,
+                        email: { ...email, port: e.target.value }
+                      })
+                    }
+                  />
+                </div>
+              </div>
+              <div className="column">
+                <div className="item">
+                  <Text h6>
                     <Translation lang={settings?.language} value="SMTP host" />
                   </Text>
                 </div>

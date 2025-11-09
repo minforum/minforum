@@ -2050,6 +2050,16 @@ const dict = [
     ko: '광고 코드'
   },
   {
+    en: 'SMTP port',
+    es: 'Puerto SMTP',
+    fr: 'Port SMTP',
+    de: 'SMTP-Port',
+    cn: 'SMTP端口',
+    ja: 'SMTPポート',
+    ru: 'Порт SMTP',
+    ko: 'SMTP 포트'
+  },
+  {
     en: 'SMTP host',
     es: 'Servidor SMTP',
     fr: 'Hôte SMTP',
@@ -4376,17 +4386,17 @@ const dict = [
     ja: 'デフォルト',
     ru: 'По умолчанию',
     ko: '기본값'
-  },{
-  en: 'Table',
-  es: 'Tabla',
-  fr: 'Tableau',
-  de: 'Tabelle',
-  cn: '表格',
-  ja: '表',
-  ru: 'Таблица',
-  ko: '표'
-}
-
+  },
+  {
+    en: 'Table',
+    es: 'Tabla',
+    fr: 'Tableau',
+    de: 'Tabelle',
+    cn: '表格',
+    ja: '表',
+    ru: 'Таблица',
+    ko: '표'
+  }
 ];
 
 export default dict;
