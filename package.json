@@ -29,7 +29,7 @@
     "@sendgrid/mail": "^8.1.6",
     "@uiw/react-codemirror": "^4.23.7",
     "apexcharts": "^3.35.3",
-    "axios": "^1.13.2",
+    "axios": "^1.13.5",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "crypto-js": "^4.2.0",
